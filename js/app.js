@@ -1,12 +1,24 @@
 var map;
+
 // Create a new blank array for all the listing markers.
 var markers = [];
+
 // This global polygon variable is to ensure only ONE polygon is rendered.
 var polygon = null;
 
 //Create an array to use in multiple functions to have control over the number of
 //places that show
 var placeMarkers = [];
+
+// These are the locations that will be shown to the user.
+var locations = [
+	{title: 'Sweetgrass Bakery', location: {lat: 46.589938,lng: -112.038616}},
+	{title: 'Park Avenue Bakery', location: {lat: 46.586355,lng: -112.040753}},
+	{title: 'Cafe Zydeco', location: {lat: 46.5961329,lng: -112.034301}},
+	{title: 'Suds Hut', location: {lat: 46.6128834,lng: -112.0211412}},
+	{title: 'Jade Garden', location: {lat: 46.6170219,lng: -112.0211496}},
+	{title: 'MacKenzie River Pizza Co.', location: {lat: 46.6181675,lng: -112.0211826}}
+];
 
 function initMap() {
 	// Create a styles array to use with the map.
@@ -266,7 +278,7 @@ function initMap() {
 ];
 	// Constructor creates a new map - only center and zoom are required.
 	map = new google.maps.Map(document.getElementById('map'), {
-		center: {lat: 40.7413549, lng: -73.9980244},
+		center: {lat: 46.5933366, lng: -112.0857337},
 		zoom: 10,
 		styles: styles,
 		mapTypeControl: false
@@ -278,16 +290,6 @@ function initMap() {
 	//Bias the searchbox to within the bounds of the maps
 	searchBox.setBounds(map.getBounds());
 
-	// These are the real estate listings that will be shown to the user.
-	// Normally we'd have these in a database instead.
-	var locations = [
-		{title: 'Park Ave Penthouse', location: {lat: 40.7713024, lng: -73.9632393}},
-		{title: 'Chelsea Loft', location: {lat: 40.7444883, lng: -73.9949465}},
-		{title: 'Union Square Open Floor Plan', location: {lat: 40.7347062, lng: -73.9895759}},
-		{title: 'East Village Hip Studio', location: {lat: 40.7281777, lng: -73.984377}},
-		{title: 'TriBeCa Artsy Bachelor Pad', location: {lat: 40.7195264, lng: -74.0089934}},
-		{title: 'Chinatown Homey Space', location: {lat: 40.7180628, lng: -73.9961237}}
-	];
 	var largeInfowindow = new google.maps.InfoWindow();
 		// Style the markers a bit. This will be our listing marker icon.
 	var defaultIcon = makeMarkerIcon('0091ff');
@@ -299,6 +301,8 @@ function initMap() {
 		// Get the position from the location array.
 		var position = locations[i].location;
 		var title = locations[i].title;
+
+		console.log(getPlacesDetails(position, largeInfowindow));
 		// Create a marker per location, and put into markers array.
 		var marker = new google.maps.Marker({
 			position: position,
@@ -309,6 +313,7 @@ function initMap() {
 		});
 		// Push the marker to our array of markers.
 		markers.push(marker);
+
 		// Create an onclick event to open the large infowindow at each marker.
 		marker.addListener('click', function() {
 			populateInfoWindow(this, largeInfowindow);
@@ -323,10 +328,24 @@ function initMap() {
 		});
 	}
 
+	showMarkers();
+
 	//Listen for the event fired when the user selects a prediction and clicks "go"
 	document.getElementById('go-places').addEventListener('click', textSearchPlaces);
 
 }
+
+// This function will loop through the markers array and display them all.
+function showMarkers() {
+	var bounds = new google.maps.LatLngBounds();
+	// Extend the boundaries of the map for each marker and display the marker
+	for (var i = 0; i < markers.length; i++) {
+		markers[i].setMap(map);
+		bounds.extend(markers[i].position);
+	}
+	map.fitBounds(bounds);
+}
+
 // This function populates the infowindow when the marker is clicked. We'll only allow
 // one infowindow which will open at the marker that is clicked, and populate based
 // on that markers position.
@@ -334,50 +353,24 @@ function populateInfoWindow(marker, infowindow) {
 	// Check to make sure the infowindow is not already opened on this marker.
 	if (infowindow.marker != marker) {
 		// Clear the infowindow content to give the streetview time to load.
-		infowindow.setContent('');
+		infowindow.setContent('' + marker.title + '');
 		infowindow.marker = marker;
 		// Make sure the marker property is cleared if the infowindow is closed.
 		infowindow.addListener('closeclick', function() {
 			infowindow.marker = null;
 		});
-		var streetViewService = new google.maps.StreetViewService();
-		var radius = 50;
-		// In case the status is OK, which means the pano was found, compute the
-		// position of the streetview image, then calculate the heading, then get a
-		// panorama from that and set the options
-		function getStreetView(data, status) {
-			if (status == google.maps.StreetViewStatus.OK) {
-				var nearStreetViewLocation = data.location.latLng;
-				var heading = google.maps.geometry.spherical.computeHeading(
-					nearStreetViewLocation, marker.position);
-					infowindow.setContent('<div>' + marker.title + '</div><div id="pano"></div>');
-					var panoramaOptions = {
-						position: nearStreetViewLocation,
-						pov: {
-							heading: heading,
-							pitch: 30
-						}
-					};
-				var panorama = new google.maps.StreetViewPanorama(
-					document.getElementById('pano'), panoramaOptions);
-			} else {
-				infowindow.setContent('<div>' + marker.title + '</div>' +
-					'<div>No Street View Found</div>');
-			}
 		}
-		// Use streetview service to get the closest streetview image within
-		// 50 meters of the markers position
-		streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
 		// Open the infowindow on the correct marker.
 		infowindow.open(map, marker);
-	}
 }
+
 // This function will loop through the listings and hide them all.
 function hideMarkers(markers) {
 	for (var i = 0; i < markers.length; i++) {
 		markers[i].setMap(null);
 	}
 }
+
 // This function takes in a COLOR, and then creates a new marker
 // icon of that color. The icon will be 21 px wide by 34 high, have an origin
 // of 0, 0 and be anchored at 10, 34).
@@ -391,6 +384,7 @@ function makeMarkerIcon(markerColor) {
 		new google.maps.Size(21,34));
 	return markerImage;
 }
+
 //This function fires when the user selects a searchbox picklist item
 //it will do a nearby search using the selected query string or place
 function searchBoxPlaces(searchBox) {
@@ -460,6 +454,7 @@ function createMarkersForPlaces(places) {
 	}
 	map.fitBounds(bounds);
 }
+
 // This is the PLACE DETAILS search - it's the most detailed so it's only
 // executed when a marker is selected, indicating the user wants more
 // details about that place.
