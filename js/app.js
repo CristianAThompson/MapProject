@@ -280,8 +280,15 @@ var ViewModel = function() {
 		mapTypeControl: false
 	});
 
+	//Create variable to contain the infowindow for each marker
+	var warInfowindow = new google.maps.InfoWindow();
+
 	// Style the markers a bit. This will be our listing marker icon.
 	var defaultIcon = makeMarkerIcon('0091ff');
+
+	// Create a "highlighted location" marker color for when the user
+	// mouses over the marker.
+	var highlightedIcon = makeMarkerIcon('FFFF24');
 
 	var model = new Model();
 	for (var i = 0; i < model.places().length; i++) {
@@ -296,7 +303,50 @@ var ViewModel = function() {
 			icon: defaultIcon,
 			id: i
 		});
+
 		model.markers().push(marker);
+
+		// Create an onclick event to open the large infowindow at each marker.
+		marker.addListener('click', function() {
+			populateInfoWindow(this, warInfowindow);
+			toggleDrop(this);
+		});
+		// Add bounce effect to currently clicked icon
+		function toggleDrop(marker) {
+				if (marker.getAnimation() !== null) {
+					marker.setAnimation(null);
+				} else {
+					marker.setAnimation(google.maps.Animation.DROP);
+				}
+		}
+
+		// Two event listeners - one for mouseover, one for mouseout,
+		// to change the colors back and forth.
+		marker.addListener('mouseover', function() {
+			this.setIcon(highlightedIcon);
+		});
+		marker.addListener('mouseout', function() {
+			this.setIcon(defaultIcon);
+		});
+
+	}
+
+	// This function populates the infowindow when the marker is clicked. We'll only allow
+	// one infowindow which will open at the marker that is clicked, and populate based
+	// on that markers position.
+	function populateInfoWindow(marker, infowindow) {
+		// Check to make sure the infowindow is not already opened on this marker.
+		if (infowindow.marker != marker) {
+			// Clear the infowindow content to give the streetview time to load.
+			infowindow.setContent('' + marker.title + '');
+			infowindow.marker = marker;
+			// Make sure the marker property is cleared if the infowindow is closed.
+			infowindow.addListener('closeclick', function() {
+				infowindow.marker = null;
+			});
+			}
+			// Open the infowindow on the correct marker.
+			infowindow.open(self.map, marker);
 	}
 
 	// This function will loop through the markers array and display them all.
