@@ -5,6 +5,22 @@
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
     <style>
+      @@media screen and (max-width: 600px) {
+        #list {
+          z-index: 1;
+          background: #fff;
+          position: absolute;
+          border: 1px solid #999;
+          border-radius: 3px;
+          line-height: 25px;
+          max-height: 100px:
+        }
+
+        #placeslist {
+          list-style-type: none;
+          padding: 0 5px;
+        }
+      }
       html, body {
         height: 100%;
         margin: 0;
@@ -51,9 +67,6 @@
   	<div class="container">
       <div id="list">
         <ul id="placeslist" data-bind="foreach: places">
-          <li class="list-item" data-bind="text: title"></li>
-        </ul>
-        <ul id="placeslist" data-bind="foreach: markers">
           <li class="list-item" data-bind="text: title"></li>
         </ul>
       </div>

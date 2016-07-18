@@ -298,17 +298,16 @@ var ViewModel = function() {
 		});
 		model.markers().push(marker);
 	}
-	console.log(model.markers());
 
 	// This function will loop through the markers array and display them all.
 	function showMarkers() {
 		var bounds = new google.maps.LatLngBounds();
 		// Extend the boundaries of the map for each marker and display the marker
 		for (var i = 0; i < model.markers().length; i++) {
-			model.markers()[i].setMap(map);
+			model.markers()[i].setMap(self.map);
 			bounds.extend(model.markers()[i].position);
 		}
-		// map.fitBounds(bounds);
+		self.map.fitBounds(bounds);
 	}
 
 	// This function takes in a COLOR, and then creates a new marker
