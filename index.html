@@ -4,111 +4,42 @@
     <title>The Wars of Alexander the Great</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
-    <style>
-      @media screen and (max-width: 480px) {
-
-        .list-item {
-          display: block;
-          margin: 0 auto;
-          text-align: center;
-          width: 80%;
-        }
-
-        #text-container {
-          display: block;
-          height: 30%;
-          background-color: #8f8f8f;
-        }
-
-        #list {
-          background: #fff;
-          border: 1px solid #999;
-          border-radius: 2px;
-          padding-left: 3px;
-          line-height: 25px;
-          width: 40%;
-        }
-
-        #placeslist {
-          padding: 0 5px;
-          max-width: 100%;
-        }
-
-        #map-container {
-          display: block;
-          height: 75%;
-        }
-
-        #map {
-          height: 70%%;
-          display: block;
-        }
-      }
-      @media screen and (min-width: 481px){
-        html, body {
-          height: 100%;
-          margin: 0;
-          padding: 0;
-        }
-
-        .list-item {
-          display: block;
-          margin: 0 auto;
-          text-align: center;
-          width: 80%;
-        }
-
-        #map-container {
-          display: block;
-          height: 75%;
-        }
-
-        #map {
-          height: 100%;
-          display: block;
-        }
-
-        #text-container {
-          display: block;
-          height: 25%;
-          background-color: #8f8f8f;
-        }
-
-        #list {
-          display: inline-block;
-          background: #fff;
-          border: 1px solid #999;
-          border-radius: 3px;
-          line-height: 25px;
-          width: 30%;
-        }
-
-        #placeslist {
-          padding: 0 5px;
-        }
-
-        #clicked-content {
-          display: inline-block;
-          background: #fff;
-          width: 70%;
-        }
-      }
-
-    </style>
+    <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
   	<div class="container">
-      <div id="text-container">
+      <div id="content">
         <div id="list">
           <ul id="placeslist" data-bind="foreach: markers">
-            <button class="list-item" data-bind="text: title"></li>
+            <button class="list-item" data-bind="text: title, attr: {id: $index}, click: showInfoWindow"></li>
           </ul>
         </div>
         <div id="clicked-content">
+          <p>
+            Normally, both your asses would be dead as fucking fried chicken,
+            but you happen to pull this shit while I'm in a transitional period
+            so I don't wanna kill you, I wanna help you. But I can't give you
+            this case, it don't belong to me. Besides, I've already been through
+            too much shit this morning over this case to hand it over to your dumb ass.
+          </p>
+          <p>
+            Normally, both your asses would be dead as fucking fried chicken,
+            but you happen to pull this shit while I'm in a transitional period
+            so I don't wanna kill you, I wanna help you. But I can't give you
+            this case, it don't belong to me. Besides, I've already been through
+            too much shit this morning over this case to hand it over to your dumb ass.
+          </p>
+          <p>
+            Normally, both your asses would be dead as fucking fried chicken,
+            but you happen to pull this shit while I'm in a transitional period
+            so I don't wanna kill you, I wanna help you. But I can't give you
+            this case, it don't belong to me. Besides, I've already been through
+            too much shit this morning over this case to hand it over to your dumb ass.
+          </p>
         </div>
       </div>
     </div>
-    <div id="map-container">
+    <div id="mcontainer">
       <div id="map"></div>
     </div>
     <script src="js/lib/knockout-3.2.0.js"></script>

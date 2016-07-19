@@ -5,13 +5,15 @@ var Model = function() {
 	self.places = ko.observableArray([
 		{title: 'Sweetgrass Bakery', location: {lat: 46.589938, lng: -112.038616}},
 		{title: 'Park Avenue Bakery', location: {lat: 46.586355,lng: -112.040753}},
+		{title: 'MacKenzie River Pizza Co.', location: {lat: 46.6181675,lng: -112.0211826}},
 		{title: 'Cafe Zydeco', location: {lat: 46.5961329,lng: -112.034301}},
 		{title: 'Suds Hut', location: {lat: 46.6128834,lng: -112.0211412}},
-		{title: 'Jade Garden', location: {lat: 46.6170219,lng: -112.0211496}},
-		{title: 'MacKenzie River Pizza Co.', location: {lat: 46.6181675,lng: -112.0211826}}
+		{title: 'Jade Garden', location: {lat: 46.6170219,lng: -112.0211496}}
 	]);
 	self.markers = ko.observableArray([]);
 };
+
+var model = new Model();
 
 // These are the locations that will be shown to the user.
 var ViewModel = function() {
@@ -275,7 +277,7 @@ var ViewModel = function() {
 
 	self.map = new google.maps.Map(document.getElementById('map'), {
 		center: {lat: 46.5933366, lng: -112.0857337},
-		zoom: 10,
+		zoom: 11,
 		styles: styles,
 		mapTypeControl: false
 	});
@@ -288,9 +290,8 @@ var ViewModel = function() {
 
 	// Create a "highlighted location" marker color for when the user
 	// mouses over the marker.
-	var highlightedIcon = makeMarkerIcon('FFFF24');
+	var highlightedIcon = makeMarkerIcon('FF8C00');
 
-	var model = new Model();
 	for (var i = 0; i < model.places().length; i++) {
 		// Get the position from the location array.
 		var lat = model.places()[i].location;
@@ -311,6 +312,7 @@ var ViewModel = function() {
 			populateInfoWindow(this, warInfowindow);
 			toggleDrop(this);
 		});
+
 		// Add bounce effect to currently clicked icon
 		function toggleDrop(marker) {
 				if (marker.getAnimation() !== null) {
@@ -379,8 +381,14 @@ var ViewModel = function() {
 
 };
 
-function initMap() {
+// Show the correct infowindow for each marker when the list item is clicked.
+function showInfoWindow() {
 
-    var vm = new ViewModel();
-    ko.applyBindings(vm);
+	var marker = model.markers()[this.id];
+	console.log(marker.title + marker.position);
+}
+
+function initMap() {
+    var view = new ViewModel();
+    ko.applyBindings(view);
 }

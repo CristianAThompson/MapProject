@@ -1,0 +1,94 @@
+@media screen and (max-width: 600px) {
+  #container {
+    display: block;
+    height: 35%;
+  }
+
+  #mcontainer {
+    display: block;
+    position: fixed;
+    height: 55%;
+    width: 96%;
+    bottom: 2.5%;
+    overflow: hidden;
+  }
+
+  #map {
+    display: block;
+    height: 100%;
+    width: 100%;
+    left: 0px;
+    margin: 0;
+    padding: 0;
+  }
+
+  #list {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  #placeslist {
+    padding: 0;
+  }
+
+  #clicked-content {
+    max-height: 150px;
+    width: 100%;
+    text-align: center;
+    overflow: scroll;
+  }
+
+  .list-item {
+    display: inline-grid;
+    margin-bottom: 5px;
+    width: 30%;
+  }
+}
+@media screen and (min-width: 601px) {
+  #container {
+    display: block;
+    height: 35%;
+  }
+
+  #mcontainer {
+    display: block;
+    position: fixed;
+    height: 55%;
+    width: 96%;
+    bottom: 2.5%;
+    overflow: hidden;
+  }
+
+  #map {
+    display: block;
+    height: 100%;
+    width: 100%;
+    left: 0px;
+    margin: 0;
+    padding: 0;
+  }
+
+  #list {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  #placeslist {
+    padding: 0;
+  }
+
+  #clicked-content {
+    max-height: 155px;
+    width: 100%;
+    text-align: center;
+    overflow: scroll;
+  }
+
+  .list-item {
+    display: inline-grid;
+    margin-bottom: 5px;
+    width: 30%;
+  }
+}
