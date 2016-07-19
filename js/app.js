@@ -271,7 +271,7 @@ var ViewModel = function() {
 						}
 				]
 		}
-];
+    ];
 
 	self.map = new google.maps.Map(document.getElementById('map'), {
 		center: {lat: 46.5933366, lng: -112.0857337},

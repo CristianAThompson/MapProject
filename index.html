@@ -8,34 +8,40 @@
       @media screen and (max-width: 480px) {
 
         .list-item {
-          border: 1px solid #999;
-          margin: 4px 0;
+          display: block;
+          margin: 0 auto;
           text-align: center;
+          width: 80%;
+        }
+
+        #text-container {
+          display: block;
+          height: 30%;
+          background-color: #8f8f8f;
         }
 
         #list {
-          z-index: 1;
           background: #fff;
-          position: fixed;
           border: 1px solid #999;
           border-radius: 2px;
           padding-left: 3px;
           line-height: 25px;
-          width: 35%;
+          width: 40%;
         }
 
         #placeslist {
-          list-style-type: none;
           padding: 0 5px;
-          max-width: 90%;
+          max-width: 100%;
+        }
+
+        #map-container {
+          display: block;
+          height: 75%;
         }
 
         #map {
-          height: 100%;
-          bottom: 0px;
-          left: 0px;
-          right: 0px;
-          position: absolute;
+          height: 70%%;
+          display: block;
         }
       }
       @media screen and (min-width: 481px){
@@ -46,37 +52,45 @@
         }
 
         .list-item {
-          border: 1px solid #999;
-          margin: 4px 0;
+          display: block;
+          margin: 0 auto;
           text-align: center;
+          width: 80%;
+        }
+
+        #map-container {
+          display: block;
+          height: 75%;
         }
 
         #map {
           height: 100%;
-          bottom: 0px;
-          left: 0px;
-          right: 0px;
-          position: absolute;
+          display: block;
         }
 
-        #pano {
-        	width: 260px;
-        	height: 260px;
+        #text-container {
+          display: block;
+          height: 25%;
+          background-color: #8f8f8f;
         }
 
         #list {
-          z-index: 1;
+          display: inline-block;
           background: #fff;
-          position: absolute;
           border: 1px solid #999;
           border-radius: 3px;
           line-height: 25px;
-          width: 340px
+          width: 30%;
         }
 
         #placeslist {
-          list-style-type: none;
           padding: 0 5px;
+        }
+
+        #clicked-content {
+          display: inline-block;
+          background: #fff;
+          width: 70%;
         }
       }
 
@@ -84,11 +98,17 @@
   </head>
   <body>
   	<div class="container">
-      <div id="list">
-        <ul id="placeslist" data-bind="foreach: places">
-          <li class="list-item" data-bind="text: title"></li>
-        </ul>
+      <div id="text-container">
+        <div id="list">
+          <ul id="placeslist" data-bind="foreach: markers">
+            <button class="list-item" data-bind="text: title"></li>
+          </ul>
+        </div>
+        <div id="clicked-content">
+        </div>
       </div>
+    </div>
+    <div id="map-container">
       <div id="map"></div>
     </div>
     <script src="js/lib/knockout-3.2.0.js"></script>
