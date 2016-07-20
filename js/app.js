@@ -1,17 +1,30 @@
 var map;
+
+// https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=Battle_of_the_Granicus_River
+// https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=Siege_of_Halicarnassus
+// https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=Battle_of_Issus
+// https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=Siege_of_Tyre_(332_BC)
+// https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=Siege_of_Gaza
+// https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=Battle_of_Gaugamela
+// https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=Battle_of_the_Persian_Gate
+
 //stores the information within the model to be displayed on the map
 var Model = function() {
 	var self = this;
 	self.places = ko.observableArray([
-		{title: 'Sweetgrass Bakery', location: {lat: 46.589938, lng: -112.038616}},
-		{title: 'Park Avenue Bakery', location: {lat: 46.586355,lng: -112.040753}},
-		{title: 'Cafe Zydeco', location: {lat: 46.5961329,lng: -112.034301}},
-		{title: 'Suds Hut', location: {lat: 46.6128834,lng: -112.0211412}},
-		{title: 'Jade Garden', location: {lat: 46.6170219,lng: -112.0211496}},
-		{title: 'MacKenzie River Pizza Co.', location: {lat: 46.6181675,lng: -112.0211826}}
+		{title: 'Battle of the Granicus River', location: {lat: 40.0267276, lng: 27.0541123}, wiki: "Battle_of_the_Granicus"},
+		{title: 'Siege of Halicarnassus', location: {lat: 37.032088, lng: 27.430485}, wiki: "Siege_of_Halicarnassus"},
+		{title: 'Battle of Issus', location: {lat: 36.8474414, lng: 36.2003325}, wiki: "Battle_of_Issus"},
+		{title: 'Siege of Tyre', location: {lat: 33.269792, lng: 35.193262}, wiki: "Siege_of_Tyre_(332_BC)"},
+		{title: 'Siege of Gaza', location: {lat: 31.504591, lng: 34.46334}, wiki: "Siege_of_Gaza"},
+		{title: 'Battle of Gaugamela', location: {lat: 36.854746, lng: 42.972445}, wiki: "Battle_of_Gaugamela"},
+		{title: 'Battle of the Persian Gate', location: {lat: 30.6877486, lng: 51.6165331}, wiki: "Battle_of_the_Persian_Gate"}
 	]);
 	self.markers = ko.observableArray([]);
+	self.wikiData = ko.observableArray([]);
 };
+
+var model = new Model();
 
 // These are the locations that will be shown to the user.
 var ViewModel = function() {
@@ -271,11 +284,11 @@ var ViewModel = function() {
 						}
 				]
 		}
-];
+    ];
 
 	self.map = new google.maps.Map(document.getElementById('map'), {
 		center: {lat: 46.5933366, lng: -112.0857337},
-		zoom: 10,
+		zoom: 11,
 		styles: styles,
 		mapTypeControl: false
 	});
@@ -284,13 +297,12 @@ var ViewModel = function() {
 	var warInfowindow = new google.maps.InfoWindow();
 
 	// Style the markers a bit. This will be our listing marker icon.
-	var defaultIcon = makeMarkerIcon('0091ff');
+	var defaultIcon = makeMarkerIcon('markers/museum_war.png');
 
 	// Create a "highlighted location" marker color for when the user
 	// mouses over the marker.
-	var highlightedIcon = makeMarkerIcon('FFFF24');
+	var highlightedIcon = makeMarkerIcon('markers/museum_war_highlighted.png');
 
-	var model = new Model();
 	for (var i = 0; i < model.places().length; i++) {
 		// Get the position from the location array.
 		var lat = model.places()[i].location;
@@ -311,6 +323,7 @@ var ViewModel = function() {
 			populateInfoWindow(this, warInfowindow);
 			toggleDrop(this);
 		});
+
 		// Add bounce effect to currently clicked icon
 		function toggleDrop(marker) {
 				if (marker.getAnimation() !== null) {
@@ -365,8 +378,7 @@ var ViewModel = function() {
 	// of 0, 0 and be anchored at 10, 34).
 	function makeMarkerIcon(markerColor) {
 		var markerImage = new google.maps.MarkerImage(
-			'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'+ markerColor +
-			'|40|_|%E2%80%A2',
+			markerColor,
 			new google.maps.Size(21, 34),
 			new google.maps.Point(0, 0),
 			new google.maps.Point(10, 34),
@@ -375,12 +387,50 @@ var ViewModel = function() {
 	}
 
 	showMarkers();
+	wikiStore();
+
+	// This function will loop through the listings and hide them all.
+	function hideMarkers(markers) {
+		for (var i = 0; i < model.markers().length; i++) {
+			markers[i].setMap(null);
+		}
+	}
+
 	ko.applyBindings(model);
 
 };
 
-function initMap() {
+function wikiStore() {
+	model.places().forEach(function(bars, index){
+		var wiki = model.places()[index].wiki;
+		$.ajax({
+			url: "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=" + wiki + "",
+			data: "query",
+			dataType: 'jsonp',
+			type: 'GET',
+			headers: { 'Api-User-Agent': 'Example/1.0' },
+			success: function(data) {
+				console.log(JSON.stringify(data, null, '  '));
+				var rawWiki = JSON.stringify(data.query.pages);
+				model.wikiData().push(rawWiki);
+			}
+		});
+	});
+}
 
-    var vm = new ViewModel();
-    ko.applyBindings(vm);
+// Show the correct infowindow for each marker when the list item is clicked.
+function showInfoWindow() {
+	// ViewModel().hideMarkers();
+	var marker = model.markers()[this.id];
+	console.log(marker.title + marker.position);
+	var wiki = model.wikiData()[this.id];
+	document.getElementById('clicked-content').innerHTML = JSON.stringify(wiki);
+
+
+
+}
+
+function initMap() {
+    var view = new ViewModel();
+    ko.applyBindings(view);
 }

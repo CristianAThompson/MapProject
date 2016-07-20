@@ -1,0 +1,188 @@
+@media screen and (max-width: 411px) {
+
+  #mcontainer {
+    height: 300px;
+  }
+
+  #map {
+    display: block;
+    height: 98%;
+  }
+
+  #list {
+    display: block;
+    width: 98%;
+    text-align: center;
+  }
+
+  #placeslist {
+    padding: 0;
+    margin: 0;
+  }
+
+  #clicked-content {
+    display: block;
+    height: 140px;
+    overflow: auto;
+    text-align: center;
+  }
+
+  .list-item {
+    list-style-type: none;
+    border: 1px solid #000;
+    padding: 2px;
+    margin: 2px;
+  }
+}
+
+@media screen and (min-width: 412px) and (max-width: 434px) {
+
+  #mcontainer {
+    height: 350px;
+  }
+
+  #map {
+    display: block;
+    height: 98%;
+  }
+
+  #list {
+    display: block;
+    width: 98%;
+    text-align: center;
+  }
+
+  #placeslist {
+    padding: 0;
+    margin: 0;
+  }
+
+  #clicked-content {
+    display: block;
+    height: 188px;
+    overflow: auto;
+    text-align: center;
+  }
+
+  .list-item {
+    list-style-type: none;
+    border: 1px solid #000;
+    padding: 2px;
+    margin: 2px;
+  }
+}
+
+@media screen and (min-width: 435px) and (max-width: 767px) {
+
+  #mcontainer {
+    height: 350px;
+  }
+
+  #map {
+    display: block;
+    height: 98%;
+  }
+
+  #list {
+    display: block;
+    width: 98%;
+    text-align: center;
+  }
+
+  #placeslist {
+    padding: 0;
+    margin: 0;
+  }
+
+  #clicked-content {
+    display: block;
+    height: 225px;
+    overflow: auto;
+    text-align: center;
+  }
+
+  .list-item {
+    list-style-type: none;
+    border: 1px solid #000;
+    padding: 2px;
+    margin: 2px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+
+  #mcontainer {
+    height: 800px;
+  }
+
+  #map {
+    display: block;
+    height: 98%;
+  }
+
+  #list {
+    display: inline-block;
+    height: 190px;
+    width: 30%;
+    text-align: center;
+  }
+
+  #placeslist {
+    padding: 0;
+    margin: 0;
+  }
+
+  #clicked-content {
+    display: inline-block;
+    height: 190px;
+    width: 68%;
+    overflow: auto;
+    text-align: center;
+  }
+
+  .list-item {
+    list-style-type: none;
+    border: 1px solid #000;
+    padding: 2px;
+    margin: 2px;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+
+  #mcontainer {
+    height: 800px;
+  }
+
+  #map {
+    display: block;
+    height: 98%;
+  }
+
+  #list {
+    display: inline-block;
+    height: 190px;
+    width: 30%;
+    text-align: center;
+  }
+
+  #placeslist {
+    padding: 0;
+    margin: 0;
+  }
+
+  #clicked-content {
+    display: inline-block;
+    height: 190px;
+    width: 68%;
+    overflow: auto;
+    text-align: center;
+  }
+
+  .list-item {
+    list-style-type: none;
+    border: 1px solid #000;
+    padding: 2px;
+    margin: 2px;
+  }
+}
