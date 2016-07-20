@@ -1,94 +1,188 @@
-@media screen and (max-width: 600px) {
-  #container {
-    display: block;
-    height: 35%;
-  }
+@media screen and (max-width: 411px) {
 
   #mcontainer {
-    display: block;
-    position: fixed;
-    height: 55%;
-    width: 96%;
-    bottom: 2.5%;
-    overflow: hidden;
+    height: 300px;
   }
 
   #map {
     display: block;
-    height: 100%;
-    width: 100%;
-    left: 0px;
-    margin: 0;
-    padding: 0;
+    height: 98%;
   }
 
   #list {
     display: block;
-    width: 100%;
+    width: 98%;
     text-align: center;
   }
 
   #placeslist {
     padding: 0;
+    margin: 0;
   }
 
   #clicked-content {
-    max-height: 150px;
-    width: 100%;
+    display: block;
+    height: 140px;
+    overflow: auto;
     text-align: center;
-    overflow: scroll;
   }
 
   .list-item {
-    display: inline-grid;
-    margin-bottom: 5px;
-    width: 30%;
+    list-style-type: none;
+    border: 1px solid #000;
+    padding: 2px;
+    margin: 2px;
   }
 }
-@media screen and (min-width: 601px) {
-  #container {
-    display: block;
-    height: 35%;
-  }
+
+@media screen and (min-width: 412px) and (max-width: 434px) {
 
   #mcontainer {
-    display: block;
-    position: fixed;
-    height: 55%;
-    width: 96%;
-    bottom: 2.5%;
-    overflow: hidden;
+    height: 350px;
   }
 
   #map {
     display: block;
-    height: 100%;
-    width: 100%;
-    left: 0px;
-    margin: 0;
-    padding: 0;
+    height: 98%;
   }
 
   #list {
     display: block;
-    width: 100%;
+    width: 98%;
     text-align: center;
   }
 
   #placeslist {
     padding: 0;
+    margin: 0;
   }
 
   #clicked-content {
-    max-height: 155px;
-    width: 100%;
+    display: block;
+    height: 188px;
+    overflow: auto;
     text-align: center;
-    overflow: scroll;
   }
 
   .list-item {
-    display: inline-grid;
-    margin-bottom: 5px;
+    list-style-type: none;
+    border: 1px solid #000;
+    padding: 2px;
+    margin: 2px;
+  }
+}
+
+@media screen and (min-width: 435px) and (max-width: 767px) {
+
+  #mcontainer {
+    height: 350px;
+  }
+
+  #map {
+    display: block;
+    height: 98%;
+  }
+
+  #list {
+    display: block;
+    width: 98%;
+    text-align: center;
+  }
+
+  #placeslist {
+    padding: 0;
+    margin: 0;
+  }
+
+  #clicked-content {
+    display: block;
+    height: 225px;
+    overflow: auto;
+    text-align: center;
+  }
+
+  .list-item {
+    list-style-type: none;
+    border: 1px solid #000;
+    padding: 2px;
+    margin: 2px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+
+  #mcontainer {
+    height: 800px;
+  }
+
+  #map {
+    display: block;
+    height: 98%;
+  }
+
+  #list {
+    display: inline-block;
+    height: 190px;
     width: 30%;
+    text-align: center;
+  }
+
+  #placeslist {
+    padding: 0;
+    margin: 0;
+  }
+
+  #clicked-content {
+    display: inline-block;
+    height: 190px;
+    width: 68%;
+    overflow: auto;
+    text-align: center;
+  }
+
+  .list-item {
+    list-style-type: none;
+    border: 1px solid #000;
+    padding: 2px;
+    margin: 2px;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+
+  #mcontainer {
+    height: 800px;
+  }
+
+  #map {
+    display: block;
+    height: 98%;
+  }
+
+  #list {
+    display: inline-block;
+    height: 190px;
+    width: 30%;
+    text-align: center;
+  }
+
+  #placeslist {
+    padding: 0;
+    margin: 0;
+  }
+
+  #clicked-content {
+    display: inline-block;
+    height: 190px;
+    width: 68%;
+    overflow: auto;
+    text-align: center;
+  }
+
+  .list-item {
+    list-style-type: none;
+    border: 1px solid #000;
+    padding: 2px;
+    margin: 2px;
   }
 }
