@@ -1,7 +1,18 @@
 @media screen and (max-width: 411px) {
 
+  body {
+    background-image: url("../images/stone-small.jpg");
+  }
+
   #mcontainer {
-    height: 300px;
+    height: 275px;
+    border: 4px solid #000;
+  }
+
+  #content {
+    background-image: url("../images/papyrus-small.jpg");
+    border: 6px solid #000;
+
   }
 
   #map {
@@ -11,8 +22,9 @@
 
   #list {
     display: block;
-    width: 98%;
     text-align: center;
+    background-image: url("../images/papyrus-small.jpg");
+    opacity: .8;
   }
 
   #placeslist {
@@ -22,9 +34,14 @@
 
   #clicked-content {
     display: block;
-    height: 140px;
+    height: 150px;
     overflow: auto;
     text-align: center;
+    background-image: url("../images/papyrus-small.jpg");
+    margin: 2px;
+    border: 1.5px solid #000;
+    opacity: .8;
+    font-weight: bold;
   }
 
   .list-item {
@@ -32,13 +49,24 @@
     border: 1px solid #000;
     padding: 2px;
     margin: 2px;
+    font-weight: bold;
   }
 }
 
 @media screen and (min-width: 412px) and (max-width: 434px) {
 
+  body {
+    background-image: url("../images/stone-small.jpg");
+  }
+
   #mcontainer {
-    height: 350px;
+    height: 320px;
+    border: 4px solid #000;
+  }
+
+  #content {
+    background-image: url("../images/papyrus-small.jpg");
+    border: 6px solid #000;
   }
 
   #map {
@@ -50,6 +78,8 @@
     display: block;
     width: 98%;
     text-align: center;
+    background-image: url("../images/papyrus-small.jpg");
+    opacity: .8;
   }
 
   #placeslist {
@@ -59,9 +89,14 @@
 
   #clicked-content {
     display: block;
-    height: 188px;
+    height: 198px;
     overflow: auto;
     text-align: center;
+    background-image: url("../images/papyrus-small.jpg");
+    margin: 2px;
+    border: 1.5px solid #000;
+    opacity: .8;
+    font-weight: bold;
   }
 
   .list-item {
@@ -69,13 +104,24 @@
     border: 1px solid #000;
     padding: 2px;
     margin: 2px;
+    font-weight: bold;
   }
 }
 
 @media screen and (min-width: 435px) and (max-width: 767px) {
 
+  body {
+    background-image: url("../images/stone-medium.jpg");
+  }
+
   #mcontainer {
-    height: 350px;
+    height: 320px;
+    border: 4px solid #000;
+  }
+
+  #content {
+    background-image: url("../images/papyrus.jpg");
+    border: 6px solid #000;
   }
 
   #map {
@@ -87,6 +133,8 @@
     display: block;
     width: 98%;
     text-align: center;
+    background-image: url("../images/papyrus.jpg");
+    opacity: .8;
   }
 
   #placeslist {
@@ -96,9 +144,14 @@
 
   #clicked-content {
     display: block;
-    height: 225px;
+    height: 235px;
     overflow: auto;
     text-align: center;
+    background-image: url("../images/papyrus.jpg");
+    margin: 2px;
+    border: 1.5px solid #000;
+    opacity: .8;
+    font-weight: bold;
   }
 
   .list-item {
@@ -106,13 +159,24 @@
     border: 1px solid #000;
     padding: 2px;
     margin: 2px;
+    font-weight: bold;
   }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
 
+  body {
+    background-image: url("../images/stone-medium.jpg");
+  }
+
   #mcontainer {
-    height: 800px;
+    height: 715px;
+    border: 4px solid #000;
+  }
+
+  #content {
+    background-image: url("../images/papyrus.jpg");
+    border: 6px solid #000;
   }
 
   #map {
@@ -122,9 +186,11 @@
 
   #list {
     display: inline-block;
-    height: 190px;
+    height: 230px;
     width: 30%;
     text-align: center;
+    background-image: url("../images/papyrus.jpg");
+    opacity: .8;
   }
 
   #placeslist {
@@ -134,10 +200,15 @@
 
   #clicked-content {
     display: inline-block;
-    height: 190px;
+    height: 230px;
     width: 68%;
     overflow: auto;
     text-align: center;
+    background-image: url("../images/papyrus.jpg");
+    margin: 2px;
+    border: 1.5px solid #000;
+    opacity: .8;
+    font-weight: bold;
   }
 
   .list-item {
@@ -145,13 +216,29 @@
     border: 1px solid #000;
     padding: 2px;
     margin: 2px;
+    font-weight: bold;
   }
 }
 
 @media screen and (min-width: 1025px) {
 
+  body {
+    background-image: url("../images/stone.jpg");
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  #content {
+    background-image: url("../images/papyrus.jpg");
+    border: 8px solid #000;
+  }
+
   #mcontainer {
-    height: 800px;
+    height: 725px;
+    border: 4px solid #000;
   }
 
   #map {
@@ -161,9 +248,11 @@
 
   #list {
     display: inline-block;
-    height: 190px;
+    height: 230px;
     width: 30%;
     text-align: center;
+    background-image: url("../images/papyrus.jpg");
+    opacity: .8;
   }
 
   #placeslist {
@@ -173,10 +262,15 @@
 
   #clicked-content {
     display: inline-block;
-    height: 190px;
+    height: 230px;
     width: 68%;
     overflow: auto;
     text-align: center;
+    background-image: url("../images/papyrus.jpg");
+    margin: 2px;
+    border: 1.5px solid #000;
+    opacity: .8;
+    font-weight: bold;
   }
 
   .list-item {
@@ -184,5 +278,6 @@
     border: 1px solid #000;
     padding: 2px;
     margin: 2px;
+    font-weight: bold;
   }
 }

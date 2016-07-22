@@ -10,9 +10,11 @@
   	<div class="container">
       <div id="content">
         <div id="list">
-          <ul id="placeslist" data-bind="foreach: markers">
-            <li class="list-item" data-bind="text: title, attr: {id: $index}, click: showInfoWindow"></li>
+          <input id="search" type="search" data-bind="textInput: query" autocomplete="off" />
+          <ul id="placeslist" data-bind="foreach: filtered">
+            <li class="list-item" data-bind="text: title, attr: {id: $index}, click: clicky"></li>
           </ul>
+          <button type="button" data-bind="click: reset">Zoom Out</button>
         </div>
         <div id="clicked-content">
           <p>
